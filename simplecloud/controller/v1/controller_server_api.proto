@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package simplecloud.controller.v1;
+
+option java_package = "app.simplecloud.proto.controller.v1";
+option java_multiple_files = true;
+
+import "simplecloud/controller/v1/controller_types.proto";
+
+message GroupNameRequest {
+  string name = 1;
+}
+
+message ServerIdRequest {
+  string id = 1;
+}
+
+message ServerTypeRequest {
+  ServerType type = 1;
+}
+
+message GetServersByGroupResponse {
+  repeated ServerDefinition servers = 1;
+}
+
+message ServerUpdateRequest {
+  ServerDefinition server = 1;
+  bool deleted = 2;
+}
+
+service ControllerServerService {
+  rpc GetServersByType(ServerTypeRequest) returns (GetServersByGroupResponse);
+  rpc GetServersByGroup(GroupNameRequest) returns (GetServersByGroupResponse);
+  rpc GetServerById(ServerIdRequest) returns (ServerDefinition);
+  rpc StartServer(GroupNameRequest) returns (ServerDefinition);
+  rpc StopServer(ServerIdRequest) returns (StatusResponse);
+  rpc UpdateServer(ServerUpdateRequest) returns (StatusResponse);
+  rpc AttachServerHost(ServerHostDefinition) returns (StatusResponse);
+}

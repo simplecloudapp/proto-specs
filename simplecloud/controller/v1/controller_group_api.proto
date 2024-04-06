@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package simplecloud.controller.v1;
+
+option java_package = "app.simplecloud.proto.controller.v1";
+option java_multiple_files = true;
+
+import "simplecloud/controller/v1/controller_types.proto";
+
+message GetGroupByNameRequest {
+  string name = 1;
+}
+
+message GetGroupByNameResponse {
+  GroupDefinition group = 2;
+}
+
+service ControllerGroupService {
+  rpc GetGroupByName(GetGroupByNameRequest) returns (GetGroupByNameResponse);
+  rpc DeleteGroupByName(GetGroupByNameRequest) returns (StatusResponse);
+  rpc CreateGroup(GroupDefinition) returns (StatusResponse);
+}
