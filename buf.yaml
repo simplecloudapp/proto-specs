@@ -1,0 +1,8 @@
+version: v1
+name: buf.build/simplecloud/proto-specs
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
