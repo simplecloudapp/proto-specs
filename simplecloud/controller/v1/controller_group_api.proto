@@ -15,8 +15,18 @@ message GetGroupByNameResponse {
   GroupDefinition group = 2;
 }
 
+message GetAllGroupsRequest {
+
+}
+
+message GetAllGroupsResponse {
+  repeated GroupDefinition groups = 1;
+}
+
 service ControllerGroupService {
   rpc GetGroupByName(GetGroupByNameRequest) returns (GetGroupByNameResponse);
   rpc DeleteGroupByName(GetGroupByNameRequest) returns (StatusResponse);
   rpc CreateGroup(GroupDefinition) returns (StatusResponse);
+  rpc UpdateGroup(GroupDefinition) returns (StatusResponse);
+  rpc GetAllGroups(GetAllGroupsRequest) returns (GetAllGroupsResponse);
 }

@@ -23,6 +23,17 @@ message GetServersByGroupResponse {
   repeated ServerDefinition servers = 1;
 }
 
+message ServerUpdatePropertyRequest {
+  string id = 1;
+  string key = 2;
+  string value = 3;
+}
+
+message ServerUpdateStateRequest {
+  string id = 1;
+  ServerState state = 2;
+}
+
 message ServerUpdateRequest {
   ServerDefinition server = 1;
   bool deleted = 2;
@@ -35,5 +46,7 @@ service ControllerServerService {
   rpc StartServer(GroupNameRequest) returns (ServerDefinition);
   rpc StopServer(ServerIdRequest) returns (StatusResponse);
   rpc UpdateServer(ServerUpdateRequest) returns (StatusResponse);
+  rpc UpdateServerState(ServerUpdateStateRequest) returns (StatusResponse);
+  rpc UpdateServerProperty(ServerUpdatePropertyRequest) returns (StatusResponse);
   rpc AttachServerHost(ServerHostDefinition) returns (StatusResponse);
 }
