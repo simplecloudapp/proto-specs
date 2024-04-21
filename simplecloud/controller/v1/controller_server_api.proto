@@ -39,12 +39,33 @@ message ServerUpdateRequest {
   bool deleted = 2;
 }
 
+message StopServerByNumericalRequest {
+  string group = 1;
+  uint64 numericalId = 2;
+}
+
+message GetAllServersRequest {
+
+}
+
+message GetAllServersResponse {
+  repeated ServerDefinition servers = 1;
+}
+
+message GetServerByNumericalRequest {
+  string group = 1;
+  uint64 numericalId = 2;
+}
+
 service ControllerServerService {
+  rpc GetAllServers(GetAllServersRequest) returns (GetAllServersResponse);
   rpc GetServersByType(ServerTypeRequest) returns (GetServersByGroupResponse);
   rpc GetServersByGroup(GroupNameRequest) returns (GetServersByGroupResponse);
+  rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
   rpc GetServerById(ServerIdRequest) returns (ServerDefinition);
   rpc StartServer(GroupNameRequest) returns (ServerDefinition);
   rpc StopServer(ServerIdRequest) returns (StatusResponse);
+  rpc StopServerByNumerical(StopServerByNumericalRequest) returns (StatusResponse);
   rpc UpdateServer(ServerUpdateRequest) returns (StatusResponse);
   rpc UpdateServerState(ServerUpdateStateRequest) returns (StatusResponse);
   rpc UpdateServerProperty(ServerUpdatePropertyRequest) returns (StatusResponse);
