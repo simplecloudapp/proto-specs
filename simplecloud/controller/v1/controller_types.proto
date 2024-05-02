@@ -54,7 +54,3 @@ enum ServerType {
   PROXY = 1;
   OTHER = 2;
 }
-
-message StatusResponse {
-  string status = 1;
-}

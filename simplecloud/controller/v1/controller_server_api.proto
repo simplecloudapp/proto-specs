@@ -64,10 +64,10 @@ service ControllerServerService {
   rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
   rpc GetServerById(ServerIdRequest) returns (ServerDefinition);
   rpc StartServer(GroupNameRequest) returns (ServerDefinition);
-  rpc StopServer(ServerIdRequest) returns (StatusResponse);
-  rpc StopServerByNumerical(StopServerByNumericalRequest) returns (StatusResponse);
-  rpc UpdateServer(ServerUpdateRequest) returns (StatusResponse);
-  rpc UpdateServerState(ServerUpdateStateRequest) returns (StatusResponse);
-  rpc UpdateServerProperty(ServerUpdatePropertyRequest) returns (StatusResponse);
-  rpc AttachServerHost(ServerHostDefinition) returns (StatusResponse);
+  rpc StopServer(ServerIdRequest) returns (ServerDefinition);
+  rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
+  rpc UpdateServer(ServerUpdateRequest) returns (ServerDefinition);
+  rpc UpdateServerState(ServerUpdateStateRequest) returns (ServerDefinition);
+  rpc UpdateServerProperty(ServerUpdatePropertyRequest) returns (ServerDefinition);
+  rpc AttachServerHost(ServerHostDefinition) returns (ServerHostDefinition);
 }

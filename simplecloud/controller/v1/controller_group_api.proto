@@ -34,8 +34,8 @@ message GetAllGroupsResponse {
 service ControllerGroupService {
   rpc GetGroupsByType(GetGroupsByTypeRequest) returns (GetGroupsByTypeResponse);
   rpc GetGroupByName(GetGroupByNameRequest) returns (GetGroupByNameResponse);
-  rpc DeleteGroupByName(GetGroupByNameRequest) returns (StatusResponse);
-  rpc CreateGroup(GroupDefinition) returns (StatusResponse);
-  rpc UpdateGroup(GroupDefinition) returns (StatusResponse);
+  rpc DeleteGroupByName(GetGroupByNameRequest) returns (GroupDefinition);
+  rpc CreateGroup(GroupDefinition) returns (GroupDefinition);
+  rpc UpdateGroup(GroupDefinition) returns (GroupDefinition);
   rpc GetAllGroups(GetAllGroupsRequest) returns (GetAllGroupsResponse);
 }
