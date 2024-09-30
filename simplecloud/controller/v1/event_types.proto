@@ -6,16 +6,17 @@ option java_package = "app.simplecloud.proto.controller.v1";
 option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
+import "google/protobuf/timestamp.proto";
 
 message GenericEvent {
-  string type = 1; //The event type (PLEASE REVIEW IF THIS IS REALLY NEEDED)
+  string event_type = 1; //Can be any string provided by the user, just for telling apart different events
   bytes data = 2; //This allows for sending any data via events
 }
 
 message ServerStartEvent {
   ServerDefinition server = 1;
-  ServerStartCause cause = 2;
-  string started_at = 3;
+  ServerStartCause start_cause = 2;
+  google.protobuf.Timestamp started_at = 3;
 }
 
 enum ServerStartCause {
@@ -27,9 +28,9 @@ enum ServerStartCause {
 
 message ServerStopEvent {
   ServerDefinition server = 1;
-  ServerStopCause cause = 2;
+  ServerStopCause stop_cause = 2;
   ServerTerminationMode termination_mode = 3;
-  string stopped_at = 4;
+  google.protobuf.Timestamp stopped_at = 4;
 }
 
 //This allows for better filtering: e.g. notify module only showing forced stops in chat
@@ -52,5 +53,5 @@ enum ServerStopCause {
 message ServerUpdateEvent {
   ServerDefinition server_before = 1; //The server definition before the update
   ServerDefinition server_after = 2; //The server definition after the update
-  string updated_at = 3;
+  google.protobuf.Timestamp updated_at = 3;
 }

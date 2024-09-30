@@ -5,6 +5,8 @@ package simplecloud.controller.v1;
 option java_package = "app.simplecloud.proto.controller.v1";
 option java_multiple_files = true;
 
+import "google/protobuf/timestamp.proto";
+
 message GroupDefinition {
   string name = 1;
   ServerType type = 2;
@@ -14,44 +16,45 @@ message GroupDefinition {
   uint64 minimum_online_count = 6;
   uint64 maximum_online_count = 7;
   uint64 max_players = 8;
-  map<string, string> properties = 9;
+  map<string, string> cloud_properties = 9;
   uint64 new_server_player_ratio = 10;
 }
 
 message ServerDefinition {
   string unique_id = 1;
-  ServerType type = 2;
+  ServerType server_type = 2;
   string group_name = 3;
   string host_id = 4;
   uint32 numerical_id = 5;
-  string ip = 7;
-  uint64 port = 8;
+  string server_ip = 7;
+  uint64 server_port = 8;
   uint64 minimum_memory = 9;
   uint64 maximum_memory = 10;
   uint64 max_players = 11;
   uint64 player_count = 12;
-  map<string, string> properties = 13;
-  ServerState state = 14;
-  string created_at = 15;
-  string updated_at = 16;
+  map<string, string> cloud_properties = 13;
+  ServerState server_state = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
 }
 
 message ServerHostDefinition {
-  string unique_id = 1;
-  string host = 2;
-  uint32 port = 3;
+  string host_id = 1;
+  string host_host = 2;
+  uint32 host_port = 3;
 }
 
 enum ServerState {
-  PREPARING = 0;
-  STARTING = 1;
-  AVAILABLE = 2;
-  INGAME = 3;
-  STOPPING = 4;
+  UNKNOWN_STATE = 0;
+  PREPARING = 1;
+  STARTING = 2;
+  AVAILABLE = 3;
+  INGAME = 4;
+  STOPPING = 5;
 }
 
 enum ServerType {
-  SERVER = 0;
-  PROXY = 1;
-  OTHER = 2;
+  UNKNOWN_SERVER = 0;
+  SERVER = 1;
+  PROXY = 2;
 }
