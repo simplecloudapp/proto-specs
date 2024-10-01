@@ -7,13 +7,13 @@ option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
 
-message StartServerRequest {
+message ServerHostStartServerRequest {
   GroupDefinition group = 1;
   ServerDefinition server = 2;
 }
 
 service ServerHostService {
-  rpc StartServer(StartServerRequest) returns (ServerDefinition);
+  rpc StartServer(ServerHostStartServerRequest) returns (ServerDefinition);
   rpc StopServer(ServerDefinition) returns (ServerDefinition);
   rpc ReattachServer(ServerDefinition) returns (ServerDefinition);
 }
