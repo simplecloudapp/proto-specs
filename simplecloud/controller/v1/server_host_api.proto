@@ -6,7 +6,6 @@ option java_package = "app.simplecloud.proto.controller.v1";
 option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
-import "simplecloud/controller/v1/controller_server_api.proto";
 
 message StartServerRequest {
   GroupDefinition group = 1;

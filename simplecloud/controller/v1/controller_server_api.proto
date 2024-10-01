@@ -6,42 +6,58 @@ option java_package = "app.simplecloud.proto.controller.v1";
 option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
+import "simplecloud/controller/v1/event_types.proto";
 
-message GroupNameRequest {
-  string name = 1;
+message GetServersByGroupRequest {
+  string group_name = 1;
 }
 
-message ServerIdRequest {
-  string id = 1;
+message StartServerRequest {
+  string group_name = 1;
+  ServerStartCause start_cause = 2;
+}
+
+message GetServerByIdRequest {
+  string server_id = 1;
+}
+
+message StopServerRequest {
+  string server_id = 1;
+  ServerStopCause cause = 2;
 }
 
 message ServerTypeRequest {
-  ServerType type = 1;
+  ServerType server_type = 1;
 }
 
 message GetServersByGroupResponse {
   repeated ServerDefinition servers = 1;
 }
 
-message ServerUpdatePropertyRequest {
-  string id = 1;
-  string key = 2;
-  string value = 3;
+message GetServersByTypeResponse {
+  repeated ServerDefinition servers = 1;
 }
 
-message ServerUpdateStateRequest {
-  string id = 1;
-  ServerState state = 2;
+message UpdateServerPropertyRequest {
+  string server_id = 1;
+  string property_key = 2;
+  string property_value = 3;
 }
 
-message ServerUpdateRequest {
+message UpdateServerStateRequest {
+  string server_id = 1;
+  ServerState server_state = 2;
+}
+
+message UpdateServerRequest {
   ServerDefinition server = 1;
   bool deleted = 2;
 }
 
 message StopServerByNumericalRequest {
-  string group = 1;
-  uint64 numericalId = 2;
+  string server_group = 1;
+  ServerStopCause stop_cause = 2;
+  uint64 numerical_id = 3;
 }
 
 message GetAllServersRequest {
@@ -53,21 +69,25 @@ message GetAllServersResponse {
 }
 
 message GetServerByNumericalRequest {
-  string group = 1;
-  uint64 numericalId = 2;
+  string group_name = 1;
+  uint64 numerical_id = 2;
+}
+
+message AttachServerHostRequest {
+  ServerHostDefinition server_host = 1;
 }
 
 service ControllerServerService {
   rpc GetAllServers(GetAllServersRequest) returns (GetAllServersResponse);
   rpc GetServersByType(ServerTypeRequest) returns (GetServersByGroupResponse);
-  rpc GetServersByGroup(GroupNameRequest) returns (GetServersByGroupResponse);
+  rpc GetServersByGroup(GetServersByGroupRequest) returns (GetServersByTypeResponse);
   rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
-  rpc GetServerById(ServerIdRequest) returns (ServerDefinition);
-  rpc StartServer(GroupNameRequest) returns (ServerDefinition);
-  rpc StopServer(ServerIdRequest) returns (ServerDefinition);
+  rpc GetServerById(GetServerByIdRequest) returns (ServerDefinition);
+  rpc StartServer(StartServerRequest) returns (ServerDefinition);
+  rpc StopServer(StopServerRequest) returns (ServerDefinition);
   rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
-  rpc UpdateServer(ServerUpdateRequest) returns (ServerDefinition);
-  rpc UpdateServerState(ServerUpdateStateRequest) returns (ServerDefinition);
-  rpc UpdateServerProperty(ServerUpdatePropertyRequest) returns (ServerDefinition);
-  rpc AttachServerHost(ServerHostDefinition) returns (ServerHostDefinition);
+  rpc UpdateServer(UpdateServerRequest) returns (ServerDefinition);
+  rpc UpdateServerState(UpdateServerStateRequest) returns (ServerDefinition);
+  rpc UpdateServerProperty(UpdateServerPropertyRequest) returns (ServerDefinition);
+  rpc AttachServerHost(AttachServerHostRequest) returns (ServerHostDefinition);
 }

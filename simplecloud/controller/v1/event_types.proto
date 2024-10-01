@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package simplecloud.controller.v1;
+
+option java_package = "app.simplecloud.proto.controller.v1";
+option java_multiple_files = true;
+
+import "simplecloud/controller/v1/controller_types.proto";
+import "google/protobuf/timestamp.proto";
+
+message GenericEvent {
+  string event_type = 1; //Can be any string provided by the user, just for telling apart different events
+  bytes data = 2; //This allows for sending any data via events
+}
+
+message ServerStartEvent {
+  ServerDefinition server = 1;
+  ServerStartCause start_cause = 2;
+  google.protobuf.Timestamp started_at = 3;
+}
+
+enum ServerStartCause {
+  UNKNOWN_START = 0;
+  RECONCILER_START = 1; //Start issued by the reconciler
+  USER_START = 2; //Starts issued by users via cli, ingame or dashboard
+  API_START = 3; //Start issued by API users
+}
+
+message ServerStopEvent {
+  ServerDefinition server = 1;
+  ServerStopCause stop_cause = 2;
+  ServerTerminationMode termination_mode = 3;
+  google.protobuf.Timestamp stopped_at = 4;
+}
+
+//This allows for better filtering: e.g. notify module only showing forced stops in chat
+enum ServerTerminationMode {
+  UNKNOWN_MODE = 0;
+  GRACEFUL = 1;
+  FORCED = 2;
+}
+
+//This allows for better filtering: e.g. notify module only showing server crashes in chat
+enum ServerStopCause {
+  UNKNOWN_STOP = 0;
+  RECONCILE_STOP = 1; //Stops issued by the reconciler
+  USER_STOP = 2; //Stops issued by users via cli, ingame or dashboard
+  API_STOP = 3; //Stops issued by API users
+  TIMEOUT_STOP = 4; //Stops issued because a server was not responding
+  NATURAL_STOP = 5; //Stops issued because a server naturally stopped (e.g. finished game)
+}
+
+message ServerUpdateEvent {
+  ServerDefinition server_before = 1; //The server definition before the update
+  ServerDefinition server_after = 2; //The server definition after the update
+  google.protobuf.Timestamp updated_at = 3;
+}
