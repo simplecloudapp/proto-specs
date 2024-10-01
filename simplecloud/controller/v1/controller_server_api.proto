@@ -23,7 +23,7 @@ message GetServerByIdRequest {
 
 message StopServerRequest {
   string server_id = 1;
-  ServerStopCause cause = 2;
+  ServerStopCause stop_cause = 2;
 }
 
 message ServerTypeRequest {
@@ -55,7 +55,7 @@ message UpdateServerRequest {
 }
 
 message StopServerByNumericalRequest {
-  string server_group = 1;
+  string group_bane = 1;
   ServerStopCause stop_cause = 2;
   uint64 numerical_id = 3;
 }
@@ -79,8 +79,8 @@ message AttachServerHostRequest {
 
 service ControllerServerService {
   rpc GetAllServers(GetAllServersRequest) returns (GetAllServersResponse);
-  rpc GetServersByType(ServerTypeRequest) returns (GetServersByGroupResponse);
-  rpc GetServersByGroup(GetServersByGroupRequest) returns (GetServersByTypeResponse);
+  rpc GetServersByType(ServerTypeRequest) returns (GetServersByTypeResponse);
+  rpc GetServersByGroup(GetServersByGroupRequest) returns (GetServersByGroupResponse);
   rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
   rpc GetServerById(GetServerByIdRequest) returns (ServerDefinition);
   rpc StartServer(ControllerStartServerRequest) returns (ServerDefinition);
