@@ -12,7 +12,7 @@ message GetServersByGroupRequest {
   string group_name = 1;
 }
 
-message StartServerRequest {
+message ControllerStartServerRequest {
   string group_name = 1;
   ServerStartCause start_cause = 2;
 }
@@ -83,7 +83,7 @@ service ControllerServerService {
   rpc GetServersByGroup(GetServersByGroupRequest) returns (GetServersByTypeResponse);
   rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
   rpc GetServerById(GetServerByIdRequest) returns (ServerDefinition);
-  rpc StartServer(StartServerRequest) returns (ServerDefinition);
+  rpc StartServer(ControllerStartServerRequest) returns (ServerDefinition);
   rpc StopServer(StopServerRequest) returns (ServerDefinition);
   rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
   rpc UpdateServer(UpdateServerRequest) returns (ServerDefinition);
