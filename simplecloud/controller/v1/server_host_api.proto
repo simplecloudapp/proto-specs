@@ -6,14 +6,36 @@ option java_package = "app.simplecloud.proto.controller.v1";
 option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
+import "google/protobuf/timestamp.proto";
 
 message ServerHostStartServerRequest {
   GroupDefinition group = 1;
   ServerDefinition server = 2;
 }
 
+message ServerHostStreamServerLogsRequest {
+  string server_id = 1;
+}
+
+
+message ServerHostStreamServerLogsResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  string content = 2;
+}
+
+message ServerHostServerExecuteCommandRequest {
+  string server_id = 1;
+  string command = 2;
+}
+
+message ServerHostServerExecuteCommandResponse {
+
+}
+
 service ServerHostService {
   rpc StartServer(ServerHostStartServerRequest) returns (ServerDefinition);
   rpc StopServer(ServerDefinition) returns (ServerDefinition);
   rpc ReattachServer(ServerDefinition) returns (ServerDefinition);
+  rpc ExecuteCommand(ServerHostServerExecuteCommandRequest) returns (ServerHostServerExecuteCommandResponse);
+  rpc StreamServerLogs(ServerHostStreamServerLogsRequest) returns (stream ServerHostStreamServerLogsResponse);
 }
