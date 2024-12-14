@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package simplecloud.metrics.v1;
+
+option java_package = "app.simplecloud.proto.metrics.v1";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+message Metric {
+  string unique_id = 1;
+  string metric_type = 2;
+  int64 metric_value = 3;
+  google.protobuf.Timestamp time = 4;
+  repeated MetricMeta meta = 5;
+}
+
+message MetricMeta {
+  string metric_unique_id = 1;
+  string data_name = 2;
+  string data_value = 3;
+}
+
+message GetMetricsRequest {
+  // The metric types to get, if empty, all metrics will be returned
+  repeated string metric_types = 1;
+  // The start time of the query, if empty, the start time will be the beginning of time
+  google.protobuf.Timestamp from = 2;
+  // The end time of the query, if empty, the end time will be the end of time
+  google.protobuf.Timestamp to = 3;
+}
+
+message GetMetricsResponse {
+  repeated Metric metrics = 1;
+}
+
+message RecordMetricRequest {
+  Metric metric = 1;
+}
+
+message RecordMetricResponse {
+  Metric metric = 1;
+}
+
+service MetricsService {
+  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
+  rpc RecordMetric(RecordMetricRequest) returns (RecordMetricResponse);
+}
