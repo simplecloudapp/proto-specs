@@ -8,7 +8,7 @@ option java_multiple_files = true;
 import "simplecloud/controller/v1/controller_types.proto";
 
 message RegisterDropletRequest {
-  DropletDefinition def = 1;
+  DropletDefinition definition = 1;
 }
 
 message UnregisterDropletRequest {
@@ -16,7 +16,7 @@ message UnregisterDropletRequest {
 }
 
 message RegisterDropletResponse {
-  DropletDefinition def = 1;
+  DropletDefinition definition = 1;
 }
 
 message UnregisterDropletResponse {
@@ -29,7 +29,7 @@ message GetDropletRequest {
 }
 
 message GetDropletResponse {
-  DropletDefinition def = 1;
+  DropletDefinition definition = 1;
 }
 
 message GetAllDropletsRequest {
@@ -37,7 +37,7 @@ message GetAllDropletsRequest {
 }
 
 message GetAllDropletsResponse {
-  repeated DropletDefinition def = 1;
+  repeated DropletDefinition definition = 1;
 }
 
 message GetDropletsByTypeRequest {
@@ -45,7 +45,7 @@ message GetDropletsByTypeRequest {
 }
 
 message GetDropletsByTypeResponse {
-  repeated DropletDefinition def = 1;
+  repeated DropletDefinition definition = 1;
 }
 
 service ControllerDropletService {
