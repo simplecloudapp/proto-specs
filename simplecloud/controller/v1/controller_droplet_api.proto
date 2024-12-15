@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package simplecloud.controller.v1;
+
+option java_package = "app.simplecloud.proto.controller.v1";
+option java_multiple_files = true;
+
+import "simplecloud/controller/v1/controller_types.proto";
+
+message RegisterDropletRequest {
+  DropletDefinition def = 1;
+}
+
+message UnregisterDropletRequest {
+  string id = 1;
+}
+
+message RegisterDropletResponse {
+  DropletDefinition def = 1;
+}
+
+message UnregisterDropletResponse {
+
+}
+
+message GetDropletRequest {
+  string id = 1;
+  string type = 2;
+}
+
+message GetDropletResponse {
+  DropletDefinition def = 1;
+}
+
+message GetAllDropletsRequest {
+
+}
+
+message GetAllDropletsResponse {
+  repeated DropletDefinition def = 1;
+}
+
+message GetDropletsByTypeRequest {
+  string type = 1;
+}
+
+message GetDropletsByTypeResponse {
+  repeated DropletDefinition def = 1;
+}
+
+service ControllerDropletService {
+  rpc RegisterDroplet(RegisterDropletRequest) returns (RegisterDropletResponse);
+  rpc UnregisterDroplet(UnregisterDropletRequest) returns (UnregisterDropletResponse);
+  rpc GetDroplet(GetDropletRequest) returns (GetDropletResponse);
+  rpc GetAllDroplets(GetAllDropletsRequest) returns (GetAllDropletsResponse);
+  rpc GetDropletsByType(GetDropletsByTypeRequest) returns (GetDropletsByTypeResponse);
+}

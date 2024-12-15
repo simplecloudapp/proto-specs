@@ -38,6 +38,14 @@ message ServerDefinition {
   google.protobuf.Timestamp updated_at = 16;
 }
 
+message DropletDefinition {
+  string type = 1;
+  string id = 2;
+  string host = 3;
+  uint32 port = 4;
+  uint32 envoy_port = 5;
+}
+
 message ServerHostDefinition {
   string host_id = 1;
   string host_host = 2;

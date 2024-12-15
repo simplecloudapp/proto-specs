@@ -89,5 +89,7 @@ service ControllerServerService {
   rpc UpdateServer(UpdateServerRequest) returns (ServerDefinition);
   rpc UpdateServerState(UpdateServerStateRequest) returns (ServerDefinition);
   rpc UpdateServerProperty(UpdateServerPropertyRequest) returns (ServerDefinition);
-  rpc AttachServerHost(AttachServerHostRequest) returns (ServerHostDefinition);
+  rpc AttachServerHost(AttachServerHostRequest) returns (ServerHostDefinition) {
+    option deprecated = true;
+  };
 }

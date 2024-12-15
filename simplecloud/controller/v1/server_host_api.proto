@@ -13,6 +13,13 @@ message ServerHostStartServerRequest {
   ServerDefinition server = 2;
 }
 
+message TemplateFile {
+  string path = 1;
+  string type = 2;
+  bool is_directory = 3;
+}
+
+
 message ServerHostStreamServerLogsRequest {
   string server_id = 1;
 }
@@ -32,10 +39,57 @@ message ServerHostServerExecuteCommandResponse {
 
 }
 
+message GetFileTreeRequest {
+
+}
+
+message GetFileTreeResponse {
+  repeated TemplateFile files = 1;
+}
+
+message GetFileContentsRequest {
+  string path = 1;
+}
+
+message DeleteFileRequest {
+  string path = 1;
+}
+
+message DeleteFileResponse {
+
+}
+
+message UpdateFileRequest {
+  string path = 1;
+  bytes content = 2;
+}
+
+message UpdateFileResponse {
+
+}
+
+message GetFileContentsResponse {
+  bytes content = 1;
+}
+
+message MoveFileRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message MoveFileResponse {
+
+}
+
 service ServerHostService {
   rpc StartServer(ServerHostStartServerRequest) returns (ServerDefinition);
   rpc StopServer(ServerDefinition) returns (ServerDefinition);
   rpc ReattachServer(ServerDefinition) returns (ServerDefinition);
+  rpc GetFileTree(GetFileTreeRequest) returns (GetFileTreeResponse);
+  rpc GetFileContents(GetFileContentsRequest) returns (GetFileContentsResponse);
+  rpc UpdateFile(UpdateFileRequest) returns (UpdateFileResponse);
+  rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse);
+  rpc MoveFile(MoveFileRequest) returns (MoveFileResponse);
   rpc ExecuteCommand(ServerHostServerExecuteCommandRequest) returns (ServerHostServerExecuteCommandResponse);
   rpc StreamServerLogs(ServerHostStreamServerLogsRequest) returns (stream ServerHostStreamServerLogsResponse);
 }
