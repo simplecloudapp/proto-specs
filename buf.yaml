@@ -1,12 +1,12 @@
 version: v1
 name: buf.build/simplecloud/proto-specs
 breaking:
-  ignore_only:
-    RPC_DELETE:
-      - ControllerServerService.StopServerByGroup
-      - ControllerServerService.StopServerByGroupWithTimeout
   use:
     - FILE
+  except:
+    - RPC_NO_DELETE
+  ignore:
+    - simplecloud/controller/v1/controller_server_api.proto
 lint:
   use:
     - DEFAULT
