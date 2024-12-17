@@ -27,12 +27,6 @@ message StopServerRequest {
   ServerStopCause stop_cause = 2;
 }
 
-message StopServerWithTimeoutRequest {
-  string server_id = 1;
-  ServerStopCause stop_cause = 2;
-  uint32 timeout_seconds = 3;
-}
-
 message ServerTypeRequest {
   ServerType server_type = 1;
 }
@@ -67,11 +61,19 @@ message StopServerByNumericalRequest {
   uint64 numerical_id = 3;
 }
 
-message StopServerByNumericalWithTimeoutRequest {
+message StopServerByGroupRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
-  uint64 numerical_id = 3;
-  uint32 timeout_seconds = 4;
+}
+
+message StopServerByGroupWithTimeoutRequest {
+  string group_name = 1;
+  ServerStopCause stop_cause = 2;
+  uint32 timeout_seconds = 3;
+}
+
+message StopServerByGroupResponse {
+  repeated ServerDefinition servers = 1;
 }
 
 message GetAllServersRequest {
@@ -99,9 +101,9 @@ service ControllerServerService {
   rpc GetServerById(GetServerByIdRequest) returns (ServerDefinition);
   rpc StartServer(ControllerStartServerRequest) returns (ServerDefinition);
   rpc StopServer(StopServerRequest) returns (ServerDefinition);
-  rpc StopServerWithTimeout(StopServerWithTimeoutRequest) returns (ServerDefinition);
   rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
-  rpc StopServerByNumericalWithTimeout(StopServerByNumericalWithTimeoutRequest) returns (ServerDefinition);
+  rpc StopServerByGroup(StopServerByGroupRequest) returns (StopServerByGroupResponse);
+  rpc StopServerByGroupWithTimeout(StopServerByGroupWithTimeoutRequest) returns (StopServerByGroupResponse);
   rpc UpdateServer(UpdateServerRequest) returns (ServerDefinition);
   rpc UpdateServerState(UpdateServerStateRequest) returns (ServerDefinition);
   rpc UpdateServerProperty(UpdateServerPropertyRequest) returns (ServerDefinition);
