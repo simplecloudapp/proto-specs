@@ -72,7 +72,7 @@ message StopServersByGroupWithTimeoutRequest {
   uint32 timeout_seconds = 3;
 }
 
-message StopServerByGroupResponse {
+message StopServersByGroupResponse {
   repeated ServerDefinition servers = 1;
 }
 
