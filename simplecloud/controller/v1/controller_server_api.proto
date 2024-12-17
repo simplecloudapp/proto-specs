@@ -102,8 +102,8 @@ service ControllerServerService {
   rpc StartServer(ControllerStartServerRequest) returns (ServerDefinition);
   rpc StopServer(StopServerRequest) returns (ServerDefinition);
   rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
-  rpc StopServerByGroup(StopServerByGroupRequest) returns (StopServerByGroupResponse);
-  rpc StopServerByGroupWithTimeout(StopServerByGroupWithTimeoutRequest) returns (StopServerByGroupResponse);
+  rpc StopServerByGroup(StopServersByGroupRequest) returns (StopServersByGroupResponse);
+  rpc StopServerByGroupWithTimeout(StopServersByGroupWithTimeoutRequest) returns (StopServersByGroupResponse);
   rpc UpdateServer(UpdateServerRequest) returns (ServerDefinition);
   rpc UpdateServerState(UpdateServerStateRequest) returns (ServerDefinition);
   rpc UpdateServerProperty(UpdateServerPropertyRequest) returns (ServerDefinition);
