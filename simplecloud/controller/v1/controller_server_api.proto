@@ -61,12 +61,12 @@ message StopServerByNumericalRequest {
   uint64 numerical_id = 3;
 }
 
-message StopServerByGroupRequest {
+message StopServersByGroupRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
 }
 
-message StopServerByGroupWithTimeoutRequest {
+message StopServersByGroupWithTimeoutRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
   uint32 timeout_seconds = 3;
