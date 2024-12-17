@@ -3,10 +3,6 @@ name: buf.build/simplecloud/proto-specs
 breaking:
   use:
     - FILE
-  except:
-    - RPC_NO_DELETE
-  ignore:
-    - simplecloud/controller/v1/controller_server_api.proto
 lint:
   use:
     - DEFAULT
