@@ -15,7 +15,16 @@ message GetServersByGroupRequest {
 message ControllerStartServerRequest {
   string group_name = 1;
   ServerStartCause start_cause = 2;
-  int32 amount = 3;
+}
+
+message ControllerStartMultipleServersRequest {
+  string group_name = 1;
+  ServerStartCause start_cause = 2;
+  uint32 amount = 3;
+}
+
+message StartMultipleServerResponse {
+  repeated ServerDefinition servers = 1;
 }
 
 message GetServerByIdRequest {
@@ -100,6 +109,7 @@ service ControllerServerService {
   rpc GetServerByNumerical(GetServerByNumericalRequest) returns (ServerDefinition);
   rpc GetServerById(GetServerByIdRequest) returns (ServerDefinition);
   rpc StartServer(ControllerStartServerRequest) returns (ServerDefinition);
+  rpc StartMultipleServers(ControllerStartMultipleServersRequest) returns (StartMultipleServerResponse);
   rpc StopServer(StopServerRequest) returns (ServerDefinition);
   rpc StopServerByNumerical(StopServerByNumericalRequest) returns (ServerDefinition);
   rpc StopServersByGroup(StopServersByGroupRequest) returns (StopServersByGroupResponse);
