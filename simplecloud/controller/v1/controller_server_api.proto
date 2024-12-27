@@ -35,6 +35,7 @@ message GetServerByIdRequest {
 message StopServerRequest {
   string server_id = 1;
   ServerStopCause stop_cause = 2;
+  optional google.protobuf.Timestamp since = 3;
 }
 
 message ServerTypeRequest {
