@@ -7,6 +7,7 @@ option java_multiple_files = true;
 
 import "simplecloud/controller/v1/controller_types.proto";
 import "simplecloud/controller/v1/event_types.proto";
+import "google/protobuf/timestamp.proto";
 
 message GetServersByGroupRequest {
   string group_name = 1;
@@ -68,17 +69,20 @@ message StopServerByNumericalRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
   uint64 numerical_id = 3;
+  optional google.protobuf.Timestamp since = 4;
 }
 
 message StopServersByGroupRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
+  optional google.protobuf.Timestamp since = 3;
 }
 
 message StopServersByGroupWithTimeoutRequest {
   string group_name = 1;
   ServerStopCause stop_cause = 2;
   uint32 timeout_seconds = 3;
+  optional google.protobuf.Timestamp since = 4;
 }
 
 message StopServersByGroupResponse {
