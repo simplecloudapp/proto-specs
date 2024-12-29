@@ -21,6 +21,13 @@ message MetricMeta {
   string data_value = 3;
 }
 
+enum MetricRequestStep {
+  HOURLY = 0;
+  DAILY = 1;
+  MONTHLY = 2;
+  UNKNOWN_STEP = 3;
+}
+
 message GetMetricsRequest {
   // The metric types to get, if empty, all metrics will be returned
   repeated string metric_types = 1;
@@ -28,6 +35,8 @@ message GetMetricsRequest {
   google.protobuf.Timestamp from = 2;
   // The end time of the query, if empty, the end time will be the end of time
   google.protobuf.Timestamp to = 3;
+  // The step of the query, if empty, the step will be HOURLY
+  MetricRequestStep step = 4;
 }
 
 message GetMetricsResponse {
