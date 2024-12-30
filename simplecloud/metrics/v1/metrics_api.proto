@@ -26,6 +26,7 @@ enum MetricRequestStep {
   HOURLY = 1;
   DAILY = 2;
   MONTHLY = 3;
+  MINUTELY = 4;
 }
 
 enum MetricFilterType {
