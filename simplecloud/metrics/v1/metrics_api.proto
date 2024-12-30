@@ -22,10 +22,25 @@ message MetricMeta {
 }
 
 enum MetricRequestStep {
-  HOURLY = 0;
-  DAILY = 1;
-  MONTHLY = 2;
-  UNKNOWN_STEP = 3;
+  UNKNOWN_STEP = 0;
+  HOURLY = 1;
+  DAILY = 2;
+  MONTHLY = 3;
+}
+
+enum MetricFilterType {
+  UNKNOWN_FILTER_TYPE = 0;
+  EQUALS = 1;
+  STARTS_WITH = 2;
+  ENDS_WITH = 3;
+  CONTAINS = 4;
+}
+
+message MetricRequestMetaFilter {
+  string key = 1;
+  string value = 2;
+  MetricFilterType filter_type = 3;
+  bool negate = 4;
 }
 
 message GetMetricsRequest {
@@ -37,6 +52,8 @@ message GetMetricsRequest {
   google.protobuf.Timestamp to = 3;
   // The step of the query, if empty, the step will be HOURLY
   MetricRequestStep step = 4;
+  // The meta filters to apply to the query, if empty, no filters will be applied
+  repeated MetricRequestMetaFilter meta_filters = 5;
 }
 
 message GetMetricsResponse {
