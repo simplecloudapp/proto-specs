@@ -59,6 +59,14 @@ message DeleteFileResponse {
 
 }
 
+message TriggerManualActionRequest {
+  string action = 1;
+}
+
+message TriggerManualActionResponse {
+
+}
+
 message UpdateFileRequest {
   string path = 1;
   bytes content = 2;
@@ -92,4 +100,5 @@ service ServerHostService {
   rpc MoveFile(MoveFileRequest) returns (MoveFileResponse);
   rpc ExecuteCommand(ServerHostServerExecuteCommandRequest) returns (ServerHostServerExecuteCommandResponse);
   rpc StreamServerLogs(ServerHostStreamServerLogsRequest) returns (stream ServerHostStreamServerLogsResponse);
+  rpc TriggerManualAction(TriggerManualActionRequest) returns (TriggerManualActionResponse);
 }
