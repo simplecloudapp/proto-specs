@@ -37,7 +37,7 @@ This repository is licensed under [Apache 2.0][license].
 <!-- LINK GROUP -->
 
 <!-- ✅ PLEASE EDIT -->
-[banner]: https://raw.githubusercontent.com/simplecloudapp/branding/refs/heads/main/readme/banner/simplecloud.png
+[banner]: https://simplecloud.app/api/banner/Proto%20Specs
 [issue-bug-report]: https://github.com/theSimpleCloud/proto-specs/issues/new?labels=bug&projects=template=01_BUG-REPORT.yml&title=%5BBUG%5D+%3Ctitle%3E
 [issue-feature-request]: https://github.com/theSimpleCloud/proto-specs/discussions/new?category=ideas
 [docs-thisproject]: https://docs.simplecloud.app/api
