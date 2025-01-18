@@ -61,6 +61,32 @@ message GetMetricsResponse {
   repeated Metric metrics = 1;
 }
 
+message GetMetricsPaginatedRequest {
+  // The metric types to get, if empty, all metrics will be returned
+  repeated string metric_types = 1;
+  // The start time of the query, if empty, the start time will be the beginning of time
+  google.protobuf.Timestamp from = 2;
+  // The end time of the query, if empty, the end time will be the end of time
+  google.protobuf.Timestamp to = 3;
+  // The step of the query, if empty, the step will be HOURLY
+  MetricRequestStep step = 4;
+  // The meta filters to apply to the query, if empty, no filters will be applied
+  repeated MetricRequestMetaFilter meta_filters = 5;
+  // The number of items to return per page
+  int32 page_size = 6;
+  // The page token for pagination
+  string page_token = 7;
+}
+
+message GetMetricsPaginatedResponse {
+  // The list of metrics for the current page
+  repeated Metric metrics = 1;
+  // The next page token, empty if there are no more pages
+  string next_page_token = 2;
+  // The total count of metrics matching the query
+  int64 total_count = 3;
+}
+
 message RecordMetricRequest {
   Metric metric = 1;
 }
@@ -70,6 +96,12 @@ message RecordMetricResponse {
 }
 
 service MetricsService {
+  // Get metrics without pagination
   rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
+
+  // Get metrics with pagination support
+  rpc GetMetricsPaginated(GetMetricsPaginatedRequest) returns (GetMetricsPaginatedResponse);
+
+  // Record a new metric
   rpc RecordMetric(RecordMetricRequest) returns (RecordMetricResponse);
 }
