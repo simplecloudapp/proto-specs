@@ -44,6 +44,8 @@ message DropletDefinition {
   string host = 3;
   uint32 port = 4;
   uint32 envoy_port = 5;
+  string unique_id = 6;
+  google.protobuf.Timestamp created_at = 7;
 }
 
 message ServerHostDefinition {
