@@ -48,8 +48,17 @@ message GetDropletsByTypeResponse {
   repeated DropletDefinition definition = 1;
 }
 
+message HealthHandshakeRequest {
+  string unique_id = 1;
+}
+
+message HealthHandshakeResponse {
+
+}
+
 service ControllerDropletService {
   rpc RegisterDroplet(RegisterDropletRequest) returns (RegisterDropletResponse);
+  rpc HealthHandshake(HealthHandshakeRequest) returns (HealthHandshakeResponse);
   rpc UnregisterDroplet(UnregisterDropletRequest) returns (UnregisterDropletResponse);
   rpc GetDroplet(GetDropletRequest) returns (GetDropletResponse);
   rpc GetAllDroplets(GetAllDropletsRequest) returns (GetAllDropletsResponse);
