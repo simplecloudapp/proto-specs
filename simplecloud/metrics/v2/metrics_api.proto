@@ -1,6 +1,9 @@
 syntax = "proto3";
 
-package metrics.v1;
+package simplecloud.metrics.v2;
+
+option java_package = "app.simplecloud.proto.metrics.v2";
+option java_multiple_files = true;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
