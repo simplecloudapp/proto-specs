@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package metrics.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+// Core service definition
+service MetricsService {
+  // Collection endpoints
+  rpc CollectMetrics(MetricsRequest) returns (MetricsResponse);
+  rpc StreamMetrics(stream MetricsRequest) returns (stream MetricsResponse);
+  
+  // Query endpoints
+  rpc QueryMetrics(MetricsQuery) returns (MetricsQueryResponse);
+  rpc StreamQueryMetrics(MetricsQuery) returns (stream MetricsQueryResponse);
+}
+
+// Common resource identification
+message Resource {
+  string service_name = 1;
+  string service_version = 2;
+  string environment = 3;
+  map<string, string> attributes = 4;
+}
+
+// Collection-related messages
+message MetricsRequest {
+  Resource resource = 1;
+  repeated MetricData metrics = 2;
+}
+
+message MetricsResponse {
+  string request_id = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message MetricData {
+  string name = 1;
+  string description = 2;
+  string unit = 3;
+  MetricType type = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  repeated DataPoint data_points = 6;
+  map<string, string> attributes = 7;
+}
+
+enum MetricType {
+  METRIC_TYPE_UNSPECIFIED = 0;
+  GAUGE = 1;
+  COUNTER = 2;
+  HISTOGRAM = 3;
+  SUM = 4;
+}
+
+message DataPoint {
+  oneof value {
+    double double_value = 1;
+    int64 int_value = 2;
+    Histogram histogram_value = 3;
+  }
+  google.protobuf.Timestamp timestamp = 4;
+  map<string, string> attributes = 5;
+}
+
+message Histogram {
+  repeated double bucket_boundaries = 1;
+  repeated uint64 bucket_counts = 2;
+  uint64 count = 3;
+  double sum = 4;
+  double min = 5;
+  double max = 6;
+}
+
+// Query-related messages
+message MetricsQuery {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  
+  oneof query_type {
+    InstantQuery instant = 3;
+    RangeQuery range = 4;
+  }
+  
+  google.protobuf.Duration step = 5;
+  int32 limit = 6;
+  string order_by = 7;
+  OrderDirection order_direction = 8;
+}
+
+message InstantQuery {
+  string query = 1;
+  map<string, string> labels = 2;
+}
+
+message RangeQuery {
+  string query = 1;
+  map<string, string> labels = 2;
+}
+
+enum OrderDirection {
+  ORDER_DIRECTION_UNSPECIFIED = 0;
+  ASC = 1;
+  DESC = 2;
+}
+
+message MetricsQueryResponse {
+  string request_id = 1;
+  repeated TimeSeries series = 2;
+  QueryStats stats = 3;
+  string error_message = 4;
+}
+
+message TimeSeries {
+  map<string, string> labels = 1;
+  repeated Sample samples = 2;
+  MetricMetadata metadata = 3;
+}
+
+message Sample {
+  google.protobuf.Timestamp timestamp = 1;
+  double value = 2;
+}
+
+message QueryStats {
+  google.protobuf.Duration query_time = 1;
+  int64 samples_processed = 2;
+  int64 series_returned = 3;
+}
+
+message MetricMetadata {
+  string name = 1;
+  string description = 2;
+  string unit = 3;
+  MetricType type = 4;
+}
