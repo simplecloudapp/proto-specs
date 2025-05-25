@@ -99,6 +99,7 @@ message CloudPlayerLoginRequest {
   string uniqueId = 1;
   string name = 2;
   PlayerConnectionConfiguration playerConnection = 3;
+  string connectedProxyName = 4;
 }
 
 message CloudPlayerLoginResponse {
