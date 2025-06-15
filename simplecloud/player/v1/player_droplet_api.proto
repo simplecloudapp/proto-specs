@@ -20,6 +20,7 @@ message PlayerConnectionConfiguration {
   bool onlineMode = 3;
   string lastServerName = 4;
   bool online = 5;
+  string lastProxyServerName = 6;
 }
 
 message OfflineCloudPlayerConfiguration {
