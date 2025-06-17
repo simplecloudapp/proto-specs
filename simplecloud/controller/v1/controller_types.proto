@@ -46,6 +46,7 @@ message DropletDefinition {
   uint32 envoy_port = 5;
   string unique_id = 6;
   google.protobuf.Timestamp created_at = 7;
+  map<string, string> droplet_properties = 8;
 }
 
 message ServerHostDefinition {
