@@ -52,6 +52,7 @@ message ServerHostDefinition {
   string host_id = 1;
   string host_host = 2;
   uint32 host_port = 3;
+  uint64 maximum_memory = 4;
 }
 
 enum ServerState {
